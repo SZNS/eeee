@@ -111,6 +111,7 @@ def write_to_linear(json_payload):
     #     json_payload = json.load(f)
 
     # Create Linear Project
+    print(f"Got JSON payload: {json_payload}")
     project_name = json_payload["project"]
     project_description = json_payload.get("description") or "HELLO WORLD!"
     project_query = CREATE_PROJECT_QUERY.format(
