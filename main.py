@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 import markdown
 import functions_framework
 from openai import OpenAI
+from linear.LinearClient import write_to_linear
 import os
 import json
 
@@ -16,6 +17,8 @@ def upload():
 
     text = file.read().decode('utf-8')
     markdown_text = markdown.markdown(text)
+
+    opena_ai_resp = openai_api(markdown_text)
 
     client = OpenAI(
         api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
@@ -68,21 +71,19 @@ def upload():
     )
 
 
-    structured_response = chat_completion.choices[0].message['content']
+    structured_response = chat_completion.choices[0].message.content
 
-    # Write the response to output.json file
-    with open('output.json', 'w') as output_file:
-        json.dump(structured_response, output_file, indent=4)
+    json_resp = json.loads(structured_response)
 
-    return jsonify({'message': f'File parsed: {chat_completion}'}), 200
+    linearresp = write_to_linear(json_resp)
 
-    #Commenting this out for now for pdf support 
-    # pdf_document = pymupdf.open(stream=file.read(), filetype="pdf")
-    # text = ""
-    # for page_num in range(pdf_document.page_count):
-    #     page = pdf_document.load_page(page_num)
-    #     text += page.get_text()
-    #     print(text) I wanna output this into a output.json file
+    print(linearresp)
+
+    # # Write the response to output.json file.
+    # with open('output.json', 'w') as output_file2:
+    #     json.dump(json_resp, output_file2, indent=2)
+
+    return jsonify({'message': f'File parsed: {json_resp}'}), 200
 
 def openai_api(markdown_text):
     #openai api with parsed markdown text
