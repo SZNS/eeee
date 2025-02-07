@@ -45,9 +45,10 @@ def upload():
                                     "subtasks": {
                                         "type": "array",
                                         "items": {"type": "string"}
-                                     }
+                                     },
+                                     "state": {"type": "string"},
                                 },
-                                "required": ["title", "assignee", "due_date", "description", "subtasks"],
+                                "required": ["title", "assignee", "due_date", "description", "subtasks", "state"],
                                 "additionalProperties": False
                             }
                         }

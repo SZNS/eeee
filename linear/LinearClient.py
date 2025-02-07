@@ -40,6 +40,7 @@ CREATE_PARENT_ISSUE_QUERY_WITH_ASSIGNEE = """
                 projectId: \"{project_id}\"
                 dueDate: \"{due_date}\"
                 assigneeId: \"{assignee_id}\"
+                stateId: \"{state_id}\"
             }}
         ) {{
             success
@@ -61,6 +62,7 @@ CREATE_PARENT_ISSUE_QUERY_NO_ASSIGNEE = """
                 teamId: \"{team_id}\"
                 projectId: \"{project_id}\"
                 dueDate: \"{due_date}\"
+                stateId: \"{state_id}\"
             }}
         ) {{
             success
@@ -81,6 +83,8 @@ CREATE_SUB_ISSUE_QUERY = """
                 parentId: \"{parent_id}\"
                 teamId: \"{team_id}\"
                 projectId: \"{project_id}\"
+                assigneeId: \"{assignee_id}\"
+                stateId: \"{state_id}\"
             }}
         ) {{
             success
@@ -102,6 +106,16 @@ GET_USERS_QUERY = """
         }
     }
 """
+
+states ={ 
+    "In_Review": "277ac2c4-4f66-48ea-9480-fbedf421cc92",
+    "Todo": "f00e0798-f442-4f19-8182-0f8f79c7c836",
+    "Done": "ddb9261b-102b-47b8-95ec-e154013dbe11",
+    "In_Progress": "d5afbc10-c029-48bd-893f-bdab0d1539db",
+    "Duplicate": "c2c795a9-6a47-4979-b9b9-75ff7abda9ba",
+    "Backlog": "c1c318ec-00cc-44b4-810a-78afeee6e838",
+    "Canceled": "45e4f848-0e8c-4831-8e43-5d12d431d2ba"
+}
 
 
 def write_to_linear(json_payload):
@@ -147,24 +161,32 @@ def write_to_linear(json_payload):
             if a["name"].lower() == i["assignee"].lower()
         ]
 
+        state_id=i["state"]
+        due_date=i["due_date"] 
+
         if len(matching_assignees) > 0:
             # Create the parent issue
+            assignee_id = matching_assignees[0]["id"]
             create_parent_query = CREATE_PARENT_ISSUE_QUERY_WITH_ASSIGNEE.format(
                 title=i["title"],
-                assignee_id=matching_assignees[0]["id"],
-                due_date=i["due_date"],
+                assignee_id=assignee_id,
+                due_date=due_date,
                 issue_description=i["description"],
                 team_id=SZNS_TEAM_ID,
                 project_id=project_id,
+                state_id=states[state_id],
             )
         else:
-            # Create the parent issue
-            create_parent_query = CREATE_PARENT_ISSUE_QUERY_NO_ASSIGNEE.format(
+            #If no asignee is found, then set assignee_id to Jamie's ID
+            assignee_id = "fe03811b-cd2f-41c0-b35e-d3dc96b5bd5d"
+            create_parent_query = CREATE_PARENT_ISSUE_QUERY_WITH_ASSIGNEE.format(
                 title=i["title"],
-                due_date=i["due_date"],
+                due_date=due_date,
                 issue_description=i["description"],
                 team_id=SZNS_TEAM_ID,
                 project_id=project_id,
+                assignee_id=assignee_id,
+                state_id=states[state_id],
             )
 
         print(f"CREATING PARENT ISSUE with query: {create_parent_query}")
@@ -181,9 +203,12 @@ def write_to_linear(json_payload):
         for sub_title in i["subtasks"]:
             create_sub_query = CREATE_SUB_ISSUE_QUERY.format(
                 title=sub_title,
+                due_date=due_date,
                 parent_id=parent_id,
+                assignee_id=assignee_id,
                 team_id=SZNS_TEAM_ID,
                 project_id=project_id,
+                state_id=states[state_id],
             )
             print(f"CREATING SUB ISSUE with query: {create_sub_query}")
             sub_response = requests.post(
