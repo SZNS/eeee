@@ -18,8 +18,6 @@ def upload():
     text = file.read().decode('utf-8')
     markdown_text = markdown.markdown(text)
 
-    opena_ai_resp = openai_api(markdown_text)
-
     client = OpenAI(
         api_key=os.environ.get("OPENAI_API_KEY"),
     )
@@ -33,6 +31,7 @@ def upload():
                     "type": "object",
                     "properties": {
                         "project": {"type": "string"},
+                        "description": {"type": "string"},
                         "tasks": {
                             "type": "array",
                             "items": {
@@ -51,9 +50,9 @@ def upload():
                                 "required": ["title", "assignee", "due_date", "description", "subtasks", "state"],
                                 "additionalProperties": False
                             }
-                        }
+                        },
                     },
-                    "required": ["project", "tasks"],
+                    "required": ["project", "tasks", "description"],
                     "additionalProperties": False
                 }
             }
