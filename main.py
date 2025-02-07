@@ -21,7 +21,7 @@ def upload():
     opena_ai_resp = openai_api(markdown_text)
 
     client = OpenAI(
-        api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+        api_key=os.environ.get("OPENAI_API_KEY"),
     )
 
     response_format = {

@@ -82,6 +82,7 @@ CREATE_SUB_ISSUE_QUERY = """
                 title: \"{title}\"
                 parentId: \"{parent_id}\"
                 teamId: \"{team_id}\"
+                dueDate: \"{due_date}\"
                 projectId: \"{project_id}\"
                 assigneeId: \"{assignee_id}\"
                 stateId: \"{state_id}\"
@@ -199,7 +200,7 @@ def write_to_linear(json_payload):
         print(f"Got create parent issue response: {i_response_json}")
 
         parent_id = i_response_json["data"]["issueCreate"]["issue"]["id"]
-        # Create Linear Sub Issues
+        #Create Linear Sub Issues
         for sub_title in i["subtasks"]:
             create_sub_query = CREATE_SUB_ISSUE_QUERY.format(
                 title=sub_title,
