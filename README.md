@@ -15,7 +15,7 @@ We are team that highly values four e's and live by them
         --entry-point main \
         --trigger-http \
         --allow-unauthenticated \
-        --set-env-vars OPENAI_API_KEY=your-openai-api-key
+        --set-env-vars OPENAI_API_KEY=your-openai-api-key,LINEAR_API_KEY=your-linear-api-key
     ```
 
     Replace `your-openai-api-key` with your OpenAI API key.
