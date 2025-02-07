@@ -1,0 +1,116 @@
+{
+    "project": "Darden Spring Hackathon 2025",
+    "tasks": [
+        {
+            "title": "Finalize Hackathon Structure",
+            "assignee": "John Lee",
+            "due_date": "2025-02-09",
+            "description": "Define the final structure and role assignments.",
+            "subtasks": [
+                "Define event structure and role assignments",
+                "Align with Darden and Google Cloud on expectations",
+                "Confirm date and core schedule"
+            ]
+        },
+        {
+            "title": "Identify & Confirm Judges",
+            "assignee": "John Lee",
+            "due_date": "2025-03-16",
+            "description": "Secure commitments from judges (UVA & Google Cloud).",
+            "subtasks": [
+                "Reach out to proposed judges",
+                "Secure commitments and confirm availability",
+                "Communicate judging criteria and expectations"
+            ]
+        },
+        {
+            "title": "Develop Marketing Materials",
+            "assignee": "Jamie Kim",
+            "due_date": "2025-02-16",
+            "description": "Create event promotional assets.",
+            "subtasks": [
+                "Create draft versions of flyers and social media posts",
+                "Align branding with Darden and SZNS",
+                "Get final approval and prepare for distribution"
+            ]
+        },
+        {
+            "title": "Launch Tech Learning Series",
+            "assignee": "SZNS Team",
+            "due_date": "2025-02-23",
+            "description": "Conduct 4 GCP learning sessions.",
+            "subtasks": [
+                "Plan 4 learning sessions leading up to the event",
+                "Develop GCP-focused content for student preparation",
+                "Coordinate scheduling and speakers"
+            ]
+        },
+        {
+            "title": "Publish Hackathon Prep Materials",
+            "assignee": "SZNS Team",
+            "due_date": "2025-03-23",
+            "description": "Release study materials and guides.",
+            "subtasks": [
+                "Prepare guides, study materials, and toolkits",
+                "Upload resources to an accessible platform",
+                "Notify registered participants"
+            ]
+        },
+        {
+            "title": "Finalize Team Formation",
+            "assignee": "SZNS Team",
+            "due_date": "2025-03-23",
+            "description": "Ensure all student teams are set.",
+            "subtasks": [
+                "Collect team registrations",
+                "Ensure teams have necessary tools/resources",
+                "Send confirmation emails to participants"
+            ]
+        },
+        {
+            "title": "Confirm Event Logistics",
+            "assignee": "Jamie Kim",
+            "due_date": "2025-03-30",
+            "description": "Finalize venue and logistics (coordinate with UVA).",
+            "subtasks": [
+                "Confirm venue booking and layout",
+                "Arrange for AV setup and technical support",
+                "Organize catering and on-site logistics"
+            ]
+        },
+        {
+            "title": "Execute Marketing Outreach",
+            "assignee": "Jamie Kim",
+            "due_date": "2025-04-13",
+            "description": "Roll out final promotional campaign.",
+            "subtasks": [
+                "Launch LinkedIn and email campaign",
+                "Coordinate with Darden\u2019s podcast and newsletter team",
+                "Post final event reminder a week before the hackathon"
+            ]
+        },
+        {
+            "title": "Pre-event Q&A Session",
+            "assignee": "SZNS Team",
+            "due_date": "2025-04-13",
+            "description": "Host a session for participant questions.",
+            "subtasks": [
+                "Schedule live Q&A for participants",
+                "Prepare common questions and answers",
+                "Host session and provide follow-up documentation"
+            ]
+        },
+        {
+            "title": "Run Hackathon Event",
+            "assignee": "John Lee",
+            "due_date": "2025-04-25",
+            "description": "Execute the full event schedule.",
+            "subtasks": [
+                "Kick off event and welcome attendees",
+                "Facilitate workshops and mentorship sessions",
+                "Oversee hackathon phase and final presentations",
+                "Judging and awards announcement"
+            ]
+        }
+    ]
+}
